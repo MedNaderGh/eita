@@ -1,0 +1,44 @@
+<div fxLayout="row" fxLayoutAlign="center center" class="content mat-elevation-z8 login-main">
+    <mat-card style="text-align: left;text-justify: inter-word;width: 80%;">
+    <mat-card-header style="text-align: center;">
+       <mat-card-title><h1 class="title">Employés List </h1></mat-card-title>
+    </mat-card-header>
+    <mat-card-content fxLayout="column">
+        <mat-list>
+                     
+          
+            <table>
+              <thead>
+                <tr>
+                  <th>NOM et PRENOM</th>
+                  <th>ADDRESS EMAIL</th>
+                  <th>NUM TEL</th>
+                  <th>AUTORISATION</th>
+                  <th>ACTION</th>
+                </tr>
+              </thead>
+              <tbody>
+               
+                
+               
+                <tr *ngFor="let users of users">
+                  <td>{{users.fullName}}</td>
+                  <td>{{users.email}}</td>
+                  <td>{{users.Numtel}}</td>
+                  <td>{{users.authorized}}</td>
+                  <td> <button class="btn_action">✔️</button>
+                    <button class="btn_action">❌</button>
+                    <button class="btn_action">🗑️</button>
+                    
+                </td>
+                </tr>
+                
+              </tbody>
+            </table>
+          
+              <mat-divider></mat-divider>
+            
+          </mat-list>
+    </mat-card-content>
+    </mat-card>
+</div>

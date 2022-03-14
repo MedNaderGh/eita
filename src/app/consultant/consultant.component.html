@@ -1,0 +1,47 @@
+<mat-toolbar>
+  Consultant Dashboard
+  </mat-toolbar>
+<mat-sidenav-container>
+  <mat-sidenav #drawer 
+  [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+  [mode]="(isHandset$ | async) ? 'over' : 'side'"
+  [opened]="(isHandset$ | async) === false" class="mat-elevation-z8">
+<!-- <mat-toolbar style="background-color:#3f51b5" color="primary">Admin Dashboard</mat-toolbar> -->
+<img class="avatar mat-elevation-z8" src="https://community.southwest.com/t5/image/serverpage/image-id/10863i5166108F12E7FBBC?v=v2" />
+<h4 class="name">{{fullname}}</h4>
+<p class="designation">{{poste}}</p>
+<mat-divider></mat-divider>
+<button mat-button class="menu-button">
+  <mat-icon>insert_drive_file</mat-icon>
+  <span>Documents</span>
+</button>
+<mat-divider></mat-divider>
+
+  <button mat-button class="menu-button">
+      <mat-icon>exit_to_app</mat-icon>
+      <span>Log out</span>
+  </button>
+</mat-sidenav>
+    <mat-sidenav-content>
+      <div fxLayout="row" fxLayoutAlign="center center" class="content mat-elevation-z8 login-main">
+        <mat-card style="text-align: left;text-justify: inter-word;width: 80%;">
+        <mat-card-header style="text-align: center;">
+           <mat-card-title><h1>Documents List</h1></mat-card-title>
+        </mat-card-header>
+        <mat-card-content fxLayout="column">
+            <mat-list>
+                <mat-list-item>           
+                  <p mat-line><strong><mat-icon >work</mat-icon>work certificate </strong></p>
+                  <a href="javascript:void(0)" style="color:balck" (click)="generatedoc()"><i ><mat-icon >text_format</mat-icon></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
+                  <a href="javascript:void(0)" style="color:balck" (click)="generatePdf()"><i ><mat-icon >picture_as_pdf</mat-icon></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                      <a href="#" target="_blank" style="color:balck" (click)="generatePdfemail()"><i ><mat-icon >email</mat-icon></i></a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                  <mat-divider></mat-divider>
+                </mat-list-item>
+              </mat-list>
+        </mat-card-content>
+        </mat-card>
+</div>
+    </mat-sidenav-content>
+   
+  </mat-sidenav-container>
+  

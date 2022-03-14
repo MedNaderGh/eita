@@ -1,0 +1,53 @@
+<div class="row">
+<div class="column">
+<form class="example-form" [formGroup]="loginForm">
+    <mat-form-field class="example-full-width" appearance="fill">
+      <mat-label>Numero</mat-label>
+      <input type="number" matInput formControlName="Numero" placeholder="999">
+     
+    </mat-form-field>
+    <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Type</mat-label>
+        <input type="text" matInput formControlName="Type" placeholder="BTS">
+       
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Nom</mat-label>
+        <input type="text" matInput formControlName="Nom" placeholder="mednine">
+       
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Transmission</mat-label>
+        <input type="text" matInput formControlName="Transmission" placeholder="100">
+       
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Capacite</mat-label>
+        <input type="text" matInput formControlName="Capacite" placeholder="...">
+       
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Bande Passante</mat-label>
+        <input type="text" matInput formControlName="Bande" placeholder="...">
+       
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>configuration</mat-label>
+        <input type="text" matInput formControlName="Configuration" placeholder="...">
+       
+      </mat-form-field>
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Acceptance</mat-label>
+        <input type="date" matInput formControlName="Acceptance" placeholder="01/01/2022">
+       
+      </mat-form-field>
+      <button mat-raised-button class="submitbutton" color="primary" (click)="submit(loginForm)" [disabled]="!loginForm.valid">Ajouter</button>
+      <br>
+      <button mat-raised-button class="displaybutton" color="primary">Afficher Les Stations</button>
+  </form>
+  
+</div>
+<div class="column">
+  <div id="map"></div>
+  </div>
+</div>

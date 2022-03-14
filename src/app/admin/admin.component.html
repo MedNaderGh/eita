@@ -1,0 +1,42 @@
+<!-- <mat-toolbar color="primary">
+  <button mat-icon-button
+    (click)="drawer.toggle()"
+    *ngIf="isHandset$ | async">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <p><button mat-button (click)="drawer.toggle()"><mat-icon aria-hidden="false" aria-label="Example home icon">menu</mat-icon></button></p>
+  <span>Dashboard</span>
+</mat-toolbar> -->
+<mat-toolbar>
+  Administrator Dashboard
+  </mat-toolbar>
+<mat-sidenav-container >
+    <mat-sidenav #drawer 
+        [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+        [mode]="(isHandset$ | async) ? 'over' : 'side'"
+        [opened]="(isHandset$ | async) === false" class="mat-elevation-z8">
+      <!-- <mat-toolbar style="background-color:#3f51b5" color="primary">Admin Dashboard</mat-toolbar> -->
+      <img class="avatar mat-elevation-z8" src="https://community.southwest.com/t5/image/serverpage/image-id/10863i5166108F12E7FBBC?v=v2" />
+  <h4 class="name">Administrateur</h4>
+  <p class="designation">Administrator</p>
+<mat-divider></mat-divider>
+      <button mat-button class="menu-button" [routerLink]="['employes']">
+        <mat-icon>person</mat-icon>
+        <span>Employés</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-button class="menu-button" [routerLink]="['stations']">
+      <mat-icon>signal_cellular_alt</mat-icon>
+      <span>Stations</span>
+  </button>
+  <mat-divider></mat-divider>
+
+        <button mat-button class="menu-button">
+            <mat-icon>exit_to_app</mat-icon>
+            <span>Log out</span>
+        </button>
+    </mat-sidenav>
+    <mat-sidenav-content>
+    <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
