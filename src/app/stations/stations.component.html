@@ -43,9 +43,47 @@
       </mat-form-field>
       <button mat-raised-button class="submitbutton" color="primary" (click)="submit(loginForm)" [disabled]="!loginForm.valid">Ajouter</button>
       <br>
-      <button mat-raised-button class="displaybutton" color="primary">Afficher Les Stations</button>
+      <button mat-raised-button class="displaybutton" color="primary" (click)="stations()"> Afficher Les Stations</button>
   </form>
-  
+  <jw-modal id="custom-modal-1">
+    <table class="darkTable" cellspacing="0">
+        <thead>
+        <tr>
+        <th>Numero</th>
+        <th>Type</th>
+        <th>Nom </th>
+        <th>Transmission</th>
+        <th>Capacite</th>
+        <th>Bande</th>
+        <th>Configuration </th>
+        <th>Acceptance</th>
+        <th>Lat</th>
+        <th>Lng</th>
+        <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr *ngFor="let data of data">
+        <td class="td1">{{data.Numero}}</td>
+        <td class="td1">{{data.Type}}</td>
+        <td class="td1">{{data.Nom}}</td>
+        <td class="td1">{{data.Transmission}}</td>
+        <td class="td1">{{data.Capacite}}</td>
+        <td class="td1">{{data.Bande}}/10</td>
+        <td class="td1">{{data.Configuration}}</td>
+        <td class="td1">{{data.Acceptance}}</td>
+        <td class="td1">{{data.Lat.substring(0,8)}}</td>
+        <td class="td1">{{data.Lng.substring(0,8)}}</td>
+        <td> <button mat-icon-button (click)="update(data)">
+          <mat-icon>edit</mat-icon>
+        </button>
+        <button mat-icon-button (click)="delete(data.id)">
+          <mat-icon>delete</mat-icon>
+        </button></td>
+        </tr>
+        </tbody>
+        </table>
+</jw-modal>
 </div>
 <div class="column">
   <div id="map"></div>

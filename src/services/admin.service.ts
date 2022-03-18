@@ -15,6 +15,9 @@ export class AdminService {
   postStation(station: any){
   return this.http.post(`${this.uri}/addstation`,station,this.noAuthHeader);
 }
+  getStations(){
+    return this.http.get(`${this.uri}/getstations`);
+  }
   login(authCredentials:any) {
     return this.http.post(`${this.uri}/ressource`, authCredentials);
   }

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AdminService } from '../../services/admin.service';
 import {FormControl, FormGroup, Validators,} from '@angular/forms';
 import * as L from 'leaflet';
+import { ModalService } from '../_modal';
 @Component({
   selector: 'app-stations',
   templateUrl: './stations.component.html',
@@ -11,7 +12,8 @@ export class StationsComponent implements OnInit {
   map!: L.Map | L.LayerGroup<any>;
   waypointlat: any;
   waypointlng: any;
-  constructor(private admin:AdminService) { }
+  data:any
+  constructor(private admin:AdminService,private modalService: ModalService) { }
   loginForm = new FormGroup({
   Numero : new FormControl('', [Validators.required]),
   Type : new FormControl('', [Validators.required]),
@@ -47,5 +49,28 @@ export class StationsComponent implements OnInit {
       res => {alert("ajout de station avec succes")},
       err => {alert("echec d'ajout de station avec succes")}
     )
+  }
+  delete(id:any){
+
+  }
+  update(data:any){
+    
+  }
+  async getStations(){
+    this.admin.getStations().subscribe(
+      res => {
+        this.data=res;
+        console.log(this.data);
+      },
+      err => {
+      }
+    );
+  }
+  async stations(){
+    await this.getStations();
+    this.modalService.open('custom-modal-1');
+    }
+    closeModal(id: string) {
+      this.modalService.close(id);
   }
 }
