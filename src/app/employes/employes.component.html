@@ -7,7 +7,7 @@
         <mat-list>
                      
           
-            <table>
+            <table style="margin-left: 20%;">
               <thead>
                 <tr>
                   <th>NOM et PRENOM</th>
@@ -26,9 +26,9 @@
                   <td>{{users.email}}</td>
                   <td>{{users.Numtel}}</td>
                   <td>{{users.authorized}}</td>
-                  <td> <button class="btn_action">✔️</button>
-                    <button class="btn_action">❌</button>
-                    <button class="btn_action">🗑️</button>
+                  <td> <button class="btn_action" (click)="validate(users._id)">✔️</button>
+                    <button class="btn_action" (click)="unvalidate(users._id)">❌</button>
+                    <button class="btn_action" (click)="delete(users._id)">🗑️</button>
                     
                 </td>
                 </tr>

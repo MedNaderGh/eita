@@ -10,9 +10,12 @@ import { ModalService } from '../_modal';
 })
 export class StationsComponent implements OnInit {
   map!: L.Map | L.LayerGroup<any>;
+  marker!: L.Layer
   waypointlat: any;
   waypointlng: any;
   data:any
+  id:any
+  updating: boolean = false
   constructor(private admin:AdminService,private modalService: ModalService) { }
   loginForm = new FormGroup({
   Numero : new FormControl('', [Validators.required]),
@@ -28,13 +31,17 @@ export class StationsComponent implements OnInit {
   
 
   ngOnInit(): void {
+    
     this.map= L.map("map").setView([34.009508,9.4289231],7)
     L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
       attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(this.map);
     this.map.on("click", <LeafletMouseEvent>(e: { latlng: { lat: number; lng: number; }; }) => {
-      L.marker([e.latlng.lat, e.latlng.lng] ).addTo(
+      if (this.marker) { // check
+        this.map.removeLayer(this.marker); // remove
+      }
+      this.marker = L.marker([e.latlng.lat, e.latlng.lng] ).addTo(
         this.map
       );
       this.waypointlat = e.latlng.lat
@@ -45,16 +52,53 @@ export class StationsComponent implements OnInit {
     form.value.Lat = this.waypointlat
     form.value.Lng = this.waypointlng
     console.log(form.value)
-    this.admin.postStation(form.value).subscribe(
-      res => {alert("ajout de station avec succes")},
-      err => {alert("echec d'ajout de station avec succes")}
-    )
+    if (this.updating) {
+      this.admin.updateStation(form.value,this.id).subscribe(
+        res => {alert("Modification de station avec succes"); this.updating=false;this.map.off();this.map.remove();this.showmap();this.loginForm.reset();this.loginForm.markAsUntouched},
+        err => {alert("echec de modification de station avec succes")}
+      )
+    } else {
+      this.admin.postStation(form.value).subscribe(
+        res => {alert("ajout de station avec succes");this.updating=false;location.reload()},
+        err => {alert("echec d'ajout de station avec succes")}
+      )
+    }
   }
   delete(id:any){
-
+    this.admin.deleteStation(id).subscribe(
+      res => {alert("Suppression de station avec succes");},
+      err => {alert("echec de modification de station avec succes")}
+    )
+    this.modalService.close('custom-modal-1');
+  }
+  showmap(){
+    this.map= L.map("map").setView([34.009508,9.4289231],7)
+    L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",{
+      attribution:
+        '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(this.map);
+    this.map.on("click", <LeafletMouseEvent>(e: { latlng: { lat: number; lng: number; }; }) => {
+      if (this.marker) { // check
+        this.map.removeLayer(this.marker); // remove
+      }
+      this.marker = L.marker([e.latlng.lat, e.latlng.lng] ).addTo(
+        this.map
+      );
+      this.waypointlat = e.latlng.lat
+      this.waypointlng = e.latlng.lng
+    })
   }
   update(data:any){
-    
+    this.id = data._id
+    this.updating = true
+    delete data._id
+    this.waypointlat = data.Lat
+    this.waypointlng = data.Lng
+    this.modalService.close('custom-modal-1');
+    this.marker = L.marker([this.waypointlat, this.waypointlng] ).addTo(
+      this.map
+    );
+   this.loginForm.setValue(data) 
   }
   async getStations(){
     this.admin.getStations().subscribe(

@@ -15,6 +15,21 @@ export class AdminService {
   postStation(station: any){
   return this.http.post(`${this.uri}/addstation`,station,this.noAuthHeader);
 }
+validateUser(id:any){
+  return this.http.post(`${this.uri}/validateuser/${id}`,this.noAuthHeader);
+}
+unvalidateUser(id:any){
+  return this.http.post(`${this.uri}/unvalidateuser/${id}`,this.noAuthHeader);
+}
+deleteUser(id:any){
+  return this.http.delete(`${this.uri}/deleteuser/${id}`,this.noAuthHeader);
+}
+  updateStation(station: any,id:any){
+  return this.http.put(`${this.uri}/updatestation/${id}`,station,this.noAuthHeader);
+}
+deleteStation(id:any){
+  return this.http.delete(`${this.uri}/deletestation/${id}`);
+}
   getStations(){
     return this.http.get(`${this.uri}/getstations`);
   }
