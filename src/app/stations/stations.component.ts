@@ -59,7 +59,7 @@ export class StationsComponent implements OnInit {
       )
     } else {
       this.admin.postStation(form.value).subscribe(
-        res => {alert("ajout de station avec succes");this.updating=false;location.reload()},
+        res => {alert("ajout de station avec succes");this.updating=false;this.map.off();this.map.remove();this.showmap();this.loginForm.reset();this.loginForm.markAsUntouched},
         err => {alert("echec d'ajout de station avec succes")}
       )
     }
